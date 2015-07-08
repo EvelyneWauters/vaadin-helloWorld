@@ -6,9 +6,7 @@ import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.annotations.Widgetset;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
-import com.vaadin.ui.Label;
-import com.vaadin.ui.UI;
-import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.*;
 
 import javax.servlet.annotation.WebServlet;
 
@@ -25,8 +23,29 @@ public class HelloWorld extends UI {
     protected void init(VaadinRequest vaadinRequest) {
 
         VerticalLayout layout = new VerticalLayout();
+
+        //add text
         Label label = new Label("Hello!");
         layout.addComponent(label);
+
+        //set margins
+        layout.setMargin(true);
+
+        //add a button
+        Button button = new Button("Push me!");
+        //click-handler Java 7 (anonymous innerclass)
+//        button.addClickListener(new Button.ClickListener() {
+//                                                 @Override
+//                                                 public void buttonClick(Button.ClickEvent clickEvent) {
+//                                                     Notification.show("you clicked!");
+//                                                 }
+//                                             }
+//        );
+
+        //click)handler java 8 (gaat gewoon met rechterklik- replace with lambda expression)
+        button.addClickListener(clickEvent -> Notification.show("you clicked!"));
+        layout.addComponent(button);
+
         setContent(layout);
 
     }
